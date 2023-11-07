@@ -2,12 +2,9 @@ from django.db import models
 
 class Pais(models.Model):
     nome = models.CharField(max_length=40)
-    area = models.CharField(max_length=30)
-    clima = models.CharField(max_length=30)
-    bioma = models.CharField(max_length=30)
     
     def __str__(self):
-        return f'{self.nome} {self.area}'
+        return self.nome
 
 class Continentes(models.Model):
     nome = models.CharField(max_length=40)
@@ -16,29 +13,28 @@ class Continentes(models.Model):
     def __str__(self):
         return f'{self.nome} {self.paises}'
     
-class Estados(models.Model):
+class Clima(models.Model):
+    nome = models.CharField(max_length=40)
+    
+    def __str__(self):
+        return self.nome
+    
+class Estado(models.Model):
     nome = models.CharField(max_length=30)
-    area = models.CharField(max_length=30)
-    temperatura = models.CharField(max_length=20)
+    pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
+    temperatura = models.DecimalField(max_digits=2, decimal_places=2)
+    clima = models.ForeignKey(Clima, on_delete=models.CASCADE)
+    
+    
     
     def __str__(self):
-        return f'{self.nome} {self.area}'
-
-class Temperatura(models.Model):
-    graus = models.DecimalField(max_digits=3, decimal_places=2)
-    fahrenheit = models.DecimalField(max_digits=3, decimal_places=2)
+        return self.nome
     
-    def __str__(self):
-        return f' {self.graus} {self.fahrenheit}'
-    
-
-class DadosClimaticos(models.Model):
+class DadosClimatico(models.Model):
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
     clima = models.CharField(max_length=30)
-    graus = models.ForeignKey(Temperatura, on_delete=models.CASCADE)
+    graus = models.DecimalField(max_digits=2, decimal_places=2)
     
     def __str__(self):
-        return self.pais
-    
-
+        return f' {self.pais} {self.clima} {self.graus}'
     

@@ -3,6 +3,6 @@ from app.models import *
 
 admin.site.register(Continentes)
 admin.site.register(Pais)
-admin.site.register(Estados)
-admin.site.register(DadosClimaticos)
-admin.site.register(Temperatura)
+admin.site.register(Estado)
+admin.site.register(DadosClimatico)
+admin.site.register(Clima)
