@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from . models import *
 
-def Consultar(request):
-    consultar = {
-        'continentes': Continentes.objects.all()
+def paises(request):
+    pais = {
+        'pais': pais.objects.all()
     }
-    return render(request, 'continentes/continentes.html', Consultar)
+    return render(request, 'paises/paises.html', pais)
 
 
-def Adm(request):
+def Administracao(request):
     adm = {
         'adm': adm.objects.all()
     }
-    return render(request, 'administração/adm.html', Adm)
+    return render(request, 'administração/adm.html', adm)

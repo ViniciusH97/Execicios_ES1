@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg .bg-#E0FFFF">
         <div class="container">
             <a class="navbar-brand" href="#">Análise de Dados Climáticos</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,22 +28,19 @@
                             Administração
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                            <li><a class="dropdown-item" href="#">Continentes</a></li>
-                            <li><a class="dropdown-item" href="#">Países</a></li>
-                            <li><a class="dropdown-item" href="#">Estados</a></li>
-                            <li><a class="dropdown-item" href="#">Dados Climáticos</a></li>
-                            <li><a class="dropdown-item" href="#">Temperatura</a></li>
+                            <li><a class="dropdown-item" href="/admin/app/continentes/">Continentes</a></li>
+                            <li><a class="dropdown-item" href="/admin/app/pais">Países</a></li>
+                            <li><a class="dropdown-item" href="/admin/adpp/estado">Estados</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <div class="container mt-5">
         <h1>Bem-vindo à Pesquisa de Dados Climáticos</h1>
         <p>Aqui você pode encontrar informações climáticas e estatísticas relacionadas ao clima de diferentes regiões.</p>
-        
     </div>
 
     <div id="map" style="width: 100%; height: 500px;"></div>
@@ -54,13 +51,27 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
 
     <script>
-    var map = L.map('map').setView([0, 0], 2);  // Configurar a visualização inicial
+    var map = L.map('map').setView([0, 0], 2); 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
     }).addTo(map);
 
     </script>
+
+    <div> 
+        <h1></h1>
+        <h1>Analise Climática</h1>
+        <p>A análise climática estatística é uma ferramenta importante para entender as tendências climáticas e as 
+            mudanças que estão ocorrendo no clima ao longo do tempo. Através da análise de dados climáticos, podemos 
+            identificar padrões e tendências que nos ajudam a entender melhor o clima e suas variações. Essa análise pode ser 
+            usada para prever eventos climáticos extremos, como secas, inundações e tempestades, e para desenvolver estratégias de 
+            adaptação e mitigação para minimizar os impactos desses eventos. Além disso, a análise climática estatística é fundamental 
+            para a tomada de decisões em diversas áreas, como agricultura, energia, transporte e saúde pública, permitindo que 
+            sejam tomadas medidas preventivas e corretivas para minimizar os impactos do clima nas atividades humanas.
+        </p>        
+
+    </div>
 
 </body>
 </html>
