@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from app.forms import *
 from . models import *
 
 def paises(request):
@@ -8,8 +11,7 @@ def paises(request):
     return render(request, 'paises/paises.html', pais)
 
 
-def Administracao(request):
-    adm = {
-        'adm': adm.objects.all()
-    }
-    return render(request, 'administração/adm.html', adm)
+def adm(request):
+    return render(request, 'adm/adm.html')
+
+

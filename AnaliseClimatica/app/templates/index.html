@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +24,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Página Inicial</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administração
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'adm' %}">Administração</a>
+                    </li>
                         <ul class="dropdown-menu" aria-labelledby="adminDropdown">
                             <li><a class="dropdown-item" href="/admin/app/continentes/">Continentes</a></li>
                             <li><a class="dropdown-item" href="/admin/app/pais">Países</a></li>
@@ -43,22 +43,6 @@
         <p>Aqui você pode encontrar informações climáticas e estatísticas relacionadas ao clima de diferentes regiões.</p>
     </div>
 
-    <div id="map" style="width: 100%; height: 500px;"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
-
-    <script>
-    var map = L.map('map').setView([0, 0], 2); 
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-    }).addTo(map);
-
-    </script>
-
     <div class="text-center"> 
         <h1></h1>
         <h1>Analise Climática</h1>
@@ -70,8 +54,13 @@
             para a tomada de decisões em diversas áreas, como agricultura, energia, transporte e saúde pública, permitindo que 
             sejam tomadas medidas preventivas e corretivas para minimizar os impactos do clima nas atividades humanas.
         </p>        
+    </div>
 
+    <div class="container mt-5">
+        <iframe src="https://www.climatempo.com.br/mapas" width="100%" height="600px" frameborder="0"></iframe>
     </div>
 
 </body>
 </html>
+    
+

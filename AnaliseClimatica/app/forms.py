@@ -1,9 +1,7 @@
 from django import forms
 from .models import *
 
-# inicializando um formulario para os livros
-class EstadosForm (forms.ModelForm):
-    class Meta:
-        model = Estado
-        fields = ['nome', 'pais', 'temperatura', 'clima']
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Usuário')
+    password = forms.CharField(label='Senha', widget=forms.PasswordInput)
         
