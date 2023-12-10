@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consultar Paises</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Consultar Paises</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Paises</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>População</th>
+                    <th>Área</th>
+                    <th>Densidade</th>
+                    <th>Capital</th>
+                    <th>Moeda</th>
+                    <th>Idioma</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pais in paises %}
+                    <tr>
+                        <td>{{ pais.nome }}</td>
+                        <td>{{ pais.populacao }}</td>
+                        <td>{{ pais.area }}</td>
+                        <td>{{ pais.densidade }}</td>
+                        <td>{{ pais.capital }}</td>
+                        <td>{{ pais.moeda }}</td>
+                        <td>{{ pais.idioma }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
