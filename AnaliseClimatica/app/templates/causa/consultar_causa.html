@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Consultar Causa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+      body {
+          background-color: #f8f9fa;
+      }
+
+      .navbar {
+          background-color: #87CEEB;
+      }
+
+      .container {
+          margin-top: 20px;
+      }
+
+      h1 {
+          color: #007bff;
+      }
+
+      .text-center {
+          text-align: center;
+      }
+
+      .form-label,
+      .form-select,
+      .btn-primary {
+          background-color: #87CEEB;
+          color: #000; /* Alterado para preto */
+      }
+
+      .form-label {
+          font-weight: bold;
+          background-color: transparent; /* Removida a cor de fundo */
+      }
+
+      .btn-primary:hover {
+          background-color: #5f9ea0;
+      }
+
+      .resultado-imagem {
+          max-width: 30%;
+          height: auto;
+      }
+
+      #resultadoTexto {
+          margin-top: 10px;
+          color: #000; /* Alterado para preto */
+      }
+  </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Consequências Climáticas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <form id="formSelecao">
+            <div class="mb-3">
+                <label for="selecaoPais" class="form-label">Selecione o País:</label>
+                <select class="form-select" id="selecaoPais" name="pais">
+                    <option value="brasil">Brasil</option>
+                    <option value="argentina">Argentina</option>
+                    <option value="chile">Chile</option>
+                    <option value="uruguai">Uruguai</option>
+                    <option value="paraguai">Paraguai</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="selecaoEstado" class="form-label">Selecione o Estado:</label>
+                <select class="form-select" id="selecaoEstado" name="estado" disabled>
+                    <option value="Acre">Acre</option>
+                    <option value="AlAgoas">Alagoas</option>
+                    <option value="Amapa">Amapá</option>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="bahia">Bahia</option>
+                    <option value="ceara">Ceará</option>
+                    <option value="distrito-federal">Distrito Federal</option>
+                    <option value="espirito-santo">Espírito Santo</option>
+                    <option value="goias">Goiás</option>
+                    <option value="maranhao">Maranhão</option>
+                    <option value="mato-grosso">Mato Grosso</option>
+                    <option value="mato-grosso-do-sul">Mato Grosso do Sul</option>
+                    <option value="minas-gerais">Minas Gerais</option>
+                    <option value="para">Pará</option>
+                    <option value="paraiba">Paraíba</option>
+                    <option value="parana">Paraná</option>
+                    <option value="pernambuco">Pernambuco</option>
+                    <option value="piaui">Piauí</option>
+                    <option value="rio-de-janeiro">Rio de Janeiro</option>
+                    <option value="rio-grande-do-norte">Rio Grande do Norte</option>
+                    <option value="rio-grande-do-sul">Rio Grande do Sul</option>
+                    <option value="rondonia">Rondônia</option>
+                    <option value="roraima">Roraima</option>
+                    <option value="santa-catarina">Santa Catarina</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="sergipe">Sergipe</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="buscarCausas()">Buscar Causas do Clima</button>
+        </form>
+
+        <div id="resultado" class="mt-4">
+            <p id="resultadoTexto"></p>
+            <img src="" alt="Ilustração do clima do estado" class="img-fluid resultado-imagem" id="resultadoImagem">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function buscarCausas() {
+            var paisSelecionado = document.getElementById("selecaoPais").value;
+            var estadoSelecionado = encodeURIComponent(document.getElementById("selecaoEstado").value);
+            var resultadoTexto = document.getElementById("resultadoTexto");
+            var resultadoImagem = document.getElementById("resultadoImagem");
+
+            if (!estadoSelecionado) {
+                alert("Por favor, selecione um estado.");
+                return;
+            }
+
+            console.log('URL da chamada AJAX:', '{% url "buscar_causas" %}?estado_id=' + estadoSelecionado);
+
+            $.ajax({
+                url: '{% url "buscar_causas" %}',
+                data: { 'estado_id': estadoSelecionado },
+                dataType: 'json',
+                success: function (data) {
+                    var texto = `Causas do clima em ${estadoSelecionado}, ${paisSelecionado}:`;
+
+                    data.causas.forEach(function (causa) {
+                        texto += `\n- ${causa.nome}: ${causa.descricao}`;
+                    });
+
+                    resultadoTexto.textContent = texto;
+                    resultadoImagem.src = data.mapa_brasil_src;
+                }
+            });
+        }
+
+        document.getElementById("selecaoPais").addEventListener("change", function () {
+            document.getElementById("selecaoEstado").removeAttribute("disabled");
+        });
+
+    </script>
+
+</body>
+
+</html>
